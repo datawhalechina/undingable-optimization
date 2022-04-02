@@ -1,4 +1,5 @@
 # datawhale-operational-research
+
 ###### Datawhale运筹小组
 
 在线阅读 https://datawhalechina.github.io/undingable-optimization/
@@ -13,22 +14,18 @@
 
 学习的先修要求：了解一些基本的高数知识和数理统计知识.
 
-
-
 ## 内容设置
 
 ### （第一期）Datawhale运筹-优化与深度学习篇
 
 1. 优化与深度学习（Yang）
-1. 优化算法概述（Yang）
-2. 梯度下降与随机梯度下降（振东）
-3. 小批量随机梯度下降（小豪）
-4. 动量法（柯琴）
-5. AdaGrad（建国）
-8. Adam（Chu）
+2. 优化算法概述（Yang）
+3. 梯度下降与随机梯度下降（振东）
+4. 小批量随机梯度下降（小豪）
+5. 动量法（柯琴）
+6. AdaGrad（建国）
+7. Adam（Chu）
 8. Nesterov加速（Yang）
-
-
 
 ### （第二期）Datawhale运筹-优化基础算法篇
 
@@ -41,16 +38,12 @@
 7. 罚函数法(lj)
 8. 增广拉格朗日法(建国)
 
-
-
 ### Datawhale运筹-线性规划篇
 
 1. 凸分析基础
 2. 单纯形算法
 3. 对偶理论
 4. 应用案例
-
-
 
 ### Datawhale运筹-图论篇
 
@@ -60,8 +53,6 @@
 4. 匹配与最大匹配；完美匹配；二部图的匹配；二部图中最大匹配和最大权匹配的算法；
 5. Euler图；中国邮递员问题；Hamilton图；旅行商问题。
 
-
-
 ### Datawhale运筹-组合优化篇
 
 1. 动态规划
@@ -70,13 +61,9 @@
 4. 整数规划
 5. 在线算法
 
-
-
 ### Datawhale运筹-矩阵分析
 
 [在线阅读网页](https://liu-yang-maker.github.io/matrix-analysis/)
-
-
 
 ### 专题：
 
@@ -96,11 +83,7 @@
 5. 排队论
 6. 随机游走与鞅的简介
 
-
-
 #### Datawhale运筹-库存论篇
-
-
 
 #### Datawhale运筹-博弈论篇
 
@@ -112,8 +95,6 @@
 6. 合作博弈
 7. 贝叶斯博弈
 
-
-
 #### Datawhale运筹-马尔可夫决策过程篇
 
 1. 预备知识（关于随机过程）
@@ -123,30 +104,24 @@
 5. MDP折扣模型
 6. MDP平均模型
 
-
-
 #### Datawhale运筹-应用篇
 
 ...
 
-
-
 ## 人员安排(排名不分先后)
 
-| 成员   | 个人简介                                      | 个人主页                                                     |
-| ------ | --------------------------------------------- | ------------------------------------------------------------ |
-| 刘洋   | datawhale成员，中国科学院数学与系统科学研究院 | [知乎主页](https://www.zhihu.com/people/ming-ren-19-34)<br />公众号：鸣也的小屋 |
-| Chu    | datawhale成员，阿姆斯特丹自由大学计算机系统系 | [个人主页](http://www.chuxiaoyu.cn)                          |
-| 管柯琴 | 厦门大学管理学院                              | [个人主页](https://www.yangsuoly.com/)                       |
-| 刘斯豪 | 广东工业大学数学与统计学院                    | 公众号：Lau Chaos                                            |
-| 黄建国 | 上海科技大学信息学院                          | [知乎](https://www.zhihu.com/people/ding-jian-cai-niao-91)   |
-| 李振东 | 上海大学钱伟长学院                            | [知乎主页](https://www.zhihu.com/people/li-zhen-dong-50-19) <br />[个人主页](https://dmax13.ltd) |
-| 林景   | 武汉理工大学理学院数学系                      | [CSDN](https://blog.csdn.net/linjing_zyq)<br />[Github](https://github.com/linjing-lab) |
-| 胡锐锋 | datawhale成员，国网大数据平台工程师           | [Github](https://github.com/Relph1119)                       |
+| 成员  | 个人简介                        | 个人主页                                                                                     |
+| --- | --------------------------- | ---------------------------------------------------------------------------------------- |
+| 刘洋  | datawhale成员，中国科学院数学与系统科学研究院 | [知乎主页](https://www.zhihu.com/people/ming-ren-19-34)<br />公众号：鸣也的小屋                       |
+| Chu | datawhale成员，阿姆斯特丹自由大学计算机系统系 | [个人主页](http://www.chuxiaoyu.cn)                                                          |
+| 管柯琴 | 厦门大学管理学院                    | [个人主页](https://www.yangsuoly.com/)                                                       |
+| 刘斯豪 | 广东工业大学数学与统计学院               | 公众号：Lau Chaos                                                                            |
+| 黄建国 | 上海科技大学信息学院                  | [知乎](https://www.zhihu.com/people/ding-jian-cai-niao-91)                                 |
+| 李振东 | 上海大学钱伟长学院                   | [知乎主页](https://www.zhihu.com/people/li-zhen-dong-50-19) <br />[个人主页](https://dmax13.ltd) |
+| 林景  | 武汉理工大学理学院数学系                | [CSDN](https://blog.csdn.net/linjing_zyq)<br />[Github](https://github.com/linjing-lab)  |
+| 胡锐锋 | datawhale成员，国网大数据平台工程师      | [Github](https://github.com/Relph1119)                                                   |
 
 #### 其他
-
-
 
 ## 关注我们
 
