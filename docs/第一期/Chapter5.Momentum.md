@@ -105,36 +105,40 @@ $$
 
 $$
 \left\|\left[\begin{array}{c}
-x_{t+1}-x^{*} \\
-x_{t}-x^{*}
+x_{t+1} \\
+x_{t}
 \end{array}\right]\right\|_{2}=\left\|A^{t}\left[\begin{array}{l}
-x_{1}-x^{*} \\
-x_{0}-x^{*}
+x_{1} \\
+x_{0}
 \end{array}\right]\right\|_{2} \leq\left\|A^{t}\right\|_{2}\left\|\left[\begin{array}{l}
-x_{1}-x^{*} \\
-x_{0}-x^{*}
+x_{1} \\
+x_{0}
 \end{array}\right]\right\|_{2}
 $$
 
-由 **定理一** 可知，存在一个矩阵范数满足：
+由 **定理一**可知，存在一个矩阵范数满足：
 
 $$
-\left\|A^{t}\right\| \leqslant (\rho(A)+\epsilon)^{t}
+\left\|A^{t}\right\| \leqslant (\rho(A)+\epsilon)^{t} = O(\rho(A)^t)
 $$
 
 其中，$\rho (A) = \max \{ |\lambda_1, \lambda_2|\}$，$\lambda_1,\lambda_2$分别表示特征向量，因此有：
 
 $$
 \left\|\left[\begin{array}{c}
-x_{t+1}-x^{*} \\
-x_{t}-x^{*}
+x_{t+1} \\
+x_{t}
 \end{array}\right]\right\|_{2} \leq(\rho(A)+\epsilon)^{t}\left\|\left[\begin{array}{l}
-x_{1}-x^{*} \\
-x_{0}-x^{*}
+x_{1} \\
+x_{0}
+\end{array}\right]\right\|_{2}
+= O(\rho(A)^{t})\left\|\left[\begin{array}{l}
+x_{1} \\
+x_{0}
 \end{array}\right]\right\|_{2}
 $$
 
-&emsp;&emsp;可以发现，经过迭代最终能够收敛到一个稳定的点。
+因此，该算法将以 $A$ 的特征值的最大绝对值确定的线性速率收敛。
 
 ## 5.3 如何理解动量法
 
