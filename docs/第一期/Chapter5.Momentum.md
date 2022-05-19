@@ -390,7 +390,7 @@ plt.show()
 
 ```python
 import torch
-import torch.utils.data as Dataa
+import torch.utils.data as Data
 import torch.nn.functional as F
 from torch.autograd import Variable
 import matplotlib.pyplot as plt
@@ -443,6 +443,11 @@ vs = []
 for param in net_Momentum.parameters():
     vs.append(torch.zeros_like(param.data))
 
+def sgd_momentum(parameters, vs, lr, gamma):
+    for param, v in zip(parameters, vs):
+        v[:] = gamma * v + lr * param.grad.data
+        param.data = param.data - v
+        
 # training
 for epoch in range(EPOCH):
     train_loss = 0 
