@@ -25,7 +25,7 @@
 3. 小批量随机梯度下降（小豪）
 4. 动量法（柯琴）
 5. AdaGrad（建国）
-8. Adam（Chu）
+8. Adam（Yang）
 8. Nesterov加速（Yang）
 
 
@@ -136,7 +136,6 @@
 | 成员   | 个人简介                                      | 个人主页                                                     |
 | ------ | --------------------------------------------- | ------------------------------------------------------------ |
 | 刘洋   | datawhale成员，中国科学院数学与系统科学研究院 | [知乎主页](https://www.zhihu.com/people/ming-ren-19-34)<br />公众号：鸣也的小屋 |
-| Chu    | datawhale成员，阿姆斯特丹自由大学计算机系统系 | [个人主页](http://www.chuxiaoyu.cn)                          |
 | 管柯琴 | datawhale成员，厦门大学管理学院               | [个人主页](https://www.yangsuoly.com/)                       |
 | 刘斯豪 | 广东工业大学数学与统计学院                    | 公众号：Lau Chaos                                            |
 | 黄建国 | 上海科技大学信息学院                          | [知乎](https://www.zhihu.com/people/ding-jian-cai-niao-91)   |
