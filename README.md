@@ -127,7 +127,7 @@
 
 #### Datawhale运筹-应用篇
 
-1.求解器Gurobi
+1. 求解器Gurobi
 
 
 
