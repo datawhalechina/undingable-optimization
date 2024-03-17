@@ -52,7 +52,7 @@
 
 
 
-### Datawhale运筹-图论篇
+### （第四期）Datawhale运筹-图论篇
 
 1. 图的基本概念；最短路问题；
 2. 树及其基本性质；生成树与最小生成树；图的中心与中位点；图的矩阵表示；
@@ -62,7 +62,7 @@
 
 
 
-### Datawhale运筹-组合优化篇
+### （第五期）Datawhale运筹-组合优化篇
 
 1. 动态规划
 2. 分支定界
@@ -72,7 +72,7 @@
 
 
 
-### Datawhale运筹-矩阵分析
+### （第六期）Datawhale运筹-矩阵分析
 
 [在线阅读网页](https://liu-yang-maker.github.io/matrix-analysis/)
 
@@ -127,7 +127,7 @@
 
 #### Datawhale运筹-应用篇
 
-...
+1.求解器Gurobi
 
 
 
