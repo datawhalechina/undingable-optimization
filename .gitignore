@@ -111,3 +111,7 @@ Temporary Items
 .apdisk
 
 .idea
+
+*.pdf
+docs/第一期/SGD.py
+docs/第一期/增广拉格朗日函数法.py
