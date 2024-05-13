@@ -145,91 +145,102 @@ f(x_{k}+\alpha d_{k})\leqslant f(x_{k})+\rho \alpha\nabla f ( x_{k} )^{\mathrm{T
 $$
 其中$1>\sigma>\rho>0$。
 ### 2.4.2收敛性
-这一小节给出使用不同线搜索准则导出的算法的收敛性.此收敛性建立在一般的线搜索类算法的框架上，因此得到的结论也比较弱.不过它可以帮助我们理解线搜索类算法收敛的本质要求.
-定理 6.1 (Zoutendijk)考虑一般的迭代格式(6.1.1)，其中d 是搜索方向，w是步长，且在迭代过程中 Wolfe 准则(6.1.4)满足.假设目标函数f下有界、连续可微且梯度L-利普希茨连续，即
+&emsp;&emsp;
+这一小节给出非精确线搜索算法的收敛性。
 
+ $\textbf{Zoutendijk定理:}$考虑一般的迭代格式$x_{k+1}=x_{k}+\alpha_{K}d_{k}$，其中$d_{k}$是搜索方向，$\alpha_{k}$是步长，且在迭代过程中Wolfe准则满足。假设目标函数$f$下有界、连续可微且梯度$L$-利普希茨连续，即
 $$
 \| \nabla f ( x )-\nabla f ( y ) \| \leqslant L \| x-y \|, \quad\forall\, x, y \in\mathbb{R}^{n}, 
 $$
 那么
 
 $$
-\sum_{k=0}^{\infty} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x^{k} ) \|^{2} <+\infty, 
+\sum_{k=0}^{\infty} \operatorname{cos}^{2} \theta_{k} \| \nabla f ( x^{k} ) \|^{2} <+\infty, \tag{2}
 $$
-其中 cosθ 为负梯度-Vf(x)和下降方向d 夹角的余弦，即
+其中$\operatorname{cos}_{\theta_{k}}$为负梯度$-\nabla f(x_{k})$和下降方向$d_{k}$夹角的余弦，即
+$$
+\operatorname{cos} \theta_{k}=\frac{-\nabla f ( x_{k} )^{\mathrm{T}} d_{k}} {\| \nabla f ( x_{k} ) \| \| d_{k} \|}. 
+$$
+不等式(2)也被称为$\textbf{Zoutendijk条件}$。
 
-$$
-\operatorname{c o s} \theta_{k}=\frac{-\nabla f ( x^{k} )^{\mathrm{T}} d^{k}} {\| \nabla f ( x^{k} ) \| \| d^{k} \|}. 
-$$
-不等式(6.1.7)也被称为 Zoutendijk 条件
-证明.由条件(6.1.4b).
+&emsp;&emsp;$\textbf{证明:}$
 
+&emsp;&emsp;由wolfe条件
 $$
-\Big( \nabla f ( x^{k+1} )-\nabla f ( x^{k} ) \Big)^{\mathsf{T}} d^{k} \geqslant( c_{2}-1 ) \nabla f ( x^{k} )^{\mathsf{T}} d^{k}. 
+\nabla f ( x_{k}+\alpha d_{k} )^{\mathrm{T}} d_{k} \geqslant \sigma \nabla f ( x_{k} )^{\mathrm{T}} d_{k}, 
+$$
+可得
+$$
+\Big( \nabla f ( x_{k+1} )-\nabla f ( x_{k} ) \Big)^{\mathsf{T}} d_{k} \geqslant( \sigma-1 ) \nabla f ( x_{k} )^{\mathsf{T}} d^{k}. 
 $$
 由柯西不等式和梯度L-利普希茨连续性质
 
 $$
-\left( \nabla f ( x^{k+1} )-\nabla f ( x^{k} ) \right)^{\mathrm{T}} \! d^{k} \leqslant\| \nabla f ( x^{k+1} )-\nabla f ( x^{k} ) \| \| d^{k} \| \leqslant\alpha_{k} L \| d^{k} \|^{2}. 
+\left( \nabla f ( x_{k+1} )-\nabla f ( x_{k} ) \right)^{\mathrm{T}} \! d^{k} \leqslant\| \nabla f ( x_{k+1} )-\nabla f ( x_{k} ) \| \| d_{k} \| \leqslant\alpha_{k} L \| d_{k} \|^{2}. 
 $$
 结合上述两式可得
 
 $$
-\alpha_{k} \geqslant{\frac{c_{2}-1} {L}} {\frac{\nabla f ( x^{k} )^{\mathrm{T}} d^{k}} {\| d^{k} \|^{2}}}. 
+\alpha_{k} \geqslant{\frac{\sigma-1} {L}} {\frac{\nabla f ( x_{k} )^{\mathrm{T}} d_{k}} {\| d_{k} \|^{2}}}. 
 $$
-注意到 ▽f(x) <0，将上式代入条件(6.1.4a)，则
+注意到$\nabla f ( x_{k} )^{\mathrm{T}} d_{k}<0$，将上式代入wolfe准则中的第一个不等式$f ( x_{k}+\alpha d_{k} ) \leqslant f ( x_{k} )+\rho \alpha\nabla f ( x_{k} )^{\mathsf{T}} d_{k}$条件，则
 
 $$
-f ( x^{k+1} ) \leqslant f ( x^{k} )+c_{1} {\frac{c_{2}-1} {L}} {\frac{\left( \nabla f ( x^{k} )^{\mathsf{T}} d^{k} \right)^{2}} {\| d^{k} \|^{2}}}. 
+f ( x_{k+1} ) \leqslant f ( x_{k} )+\rho {\frac{\sigma-1} {L}} {\frac{\left( \nabla f ( x_{k} )^{\mathsf{T}} d_{k} \right)^{2}} {\| d_{k} \|^{2}}}. 
 $$
-根据 的定义，此不等式可等价表述为
+根据$\theta_{k}$的定义，此不等式可等价表述为
 
 $$
-f ( x^{k+1} ) \leqslant f ( x^{k} )+c_{1} \frac{c_{2}-1} {L} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x^{k} ) \|^{2}. 
+f ( x_{k+1} ) \leqslant f ( x_{k} )+\rho \frac{\sigma-1} {L} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x_{k} ) \|^{2}. 
 $$
-再关于k求和，我们有
+再关于k求和，有
+$$
+f ( x_{k+1} ) \leqslant f ( x_{0} )-\rho \frac{1-\sigma} {L} \sum_{j=0}^{k} \operatorname{c o s}^{2} \theta_{j} \| \nabla f ( x_{j} ) \|^{2}. 
+$$
+又因为函数$f$是下有界的，且由$0<\rho<\sigma<1$可知$\rho(1-\sigma)>0$，因此当$k\rightarrow +\infty$时
 
 $$
-f ( x^{k+1} ) \leqslant f ( x^{0} )-c_{1} \frac{1-c_{2}} {L} \sum_{j=0}^{k} \operatorname{c o s}^{2} \theta_{j} \| \nabla f ( x^{j} ) \|^{2}. 
+\sum_{j=0}^{\infty} \operatorname{cos}^{2} \theta_{j} \| \nabla f ( x_{j} ) \|^{2} <+\infty. 
 $$
-又因为函数f是下有界的，且由0<c<c<1可知 c(1-cz)>0，因此当k→∞时
 
-$$
-\sum_{j=0}^{\infty} \operatorname{c o s}^{2} \theta_{j} \| \nabla f ( x^{j} ) \|^{2} <+\infty. 
-$$
-定理 6.1 指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且下有界函数总能推出(6.1.7)式成立.实际上采用 Goldstein 准则也可推出类似的条件.Zoutendik定理刻画了线搜索准则的性质，配合下降方向d的选取方式我们可以得到最基本的收敛性.
-推论 6.1(线搜索算法的收敛性)对于迭代法(6.1.1)，设为每一步负梯度 -Vf(x)与下降方向d 的夹角，并假设对任意的k，存在常数 γ>0.使得
+&emsp;&emsp;Zoutendik定理指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且下有界函数总能推出(2)式成立。实际上采用Goldstein准则也可推出类似的条件。Zoutendik定理刻画了线搜索准则的性质，配合下降方向$d_{k}$的选取方式可以得到最基本的收敛性。
 
+
+$\textbf{线搜索算法的收敛性:}$
+
+&emsp;&emsp;对于线搜索算法，设$\theta_{k}$为每一步负梯度 $-\nabla f(x_{k})$与下降方向$d_{k}$的夹角，并假设对任意的k，存在常数$\gamma>0$，使得
 $$
 \theta_{k} < \frac{\pi} {2}-\gamma, 
 $$
-则在定理6.1成立的条件下，有
-
+则在Zoutendik定理成立的条件下，有
 $$
 \operatorname* {l i m}_{k \to\infty} \nabla f ( x^{k} )=0. 
 $$
-证明.
-假设结论不成立，即存在子列{k}和正常数δ>0，使得
+&emsp;&emsp;$\textbf{证明:}$
+
+&emsp;&emsp;假设结论不成立，即存在子列$\{k_{l}\}$和正常数$\delta>0$，使得
 
 $$
-\| \nabla f ( x^{k_{l}} ) \| \geqslant\delta, \quad l=1, 2, \cdots. 
+\| \nabla f ( x_{k_{l}} ) \| \geqslant\delta, \quad l=1, 2, \cdots. 
 $$
-根据  的假设，对任意的 k,
+根据$\theta_{k}$的假设，对任意的k,
 
 $$
 \operatorname{c o s} \theta_{k} > \operatorname{s i n} \gamma> 0. 
 $$
-我们仅考虑和式(6.1.7)的第k 项，有
+我们仅考虑式(2)的第$k_{l}$项，有
 
 $$
-\begin{aligned} {{\sum_{k=0}^{\infty} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x^{k} ) \|^{2}}} & {{} \geqslant\sum_{l=1}^{\infty} \operatorname{c o s}^{2} \theta_{k_{l}} \| \nabla f ( x^{k_{l}} ) \|^{2}} \\ {} & {{} \geqslant\sum_{l=1}^{\infty} ( \operatorname{s i n}^{2} \gamma) \cdot\delta^{2} \to+\infty,} \\ \end{aligned} 
+\begin{aligned} {{\sum_{k=0}^{\infty} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x_{k} ) \|^{2}}} & {{} \geqslant\sum_{l=1}^{\infty} \operatorname{cos}^{2} \theta_{k_{l}} \| \nabla f ( x_{k_{l}} ) \|^{2}} \\ {} & {{} \geqslant\sum_{l=1}^{\infty} ( \operatorname{sin}^{2} \gamma) \cdot\delta^{2} \to+\infty,} \\ \end{aligned} 
 $$
-这显然和定理6.1矛盾.因此必有
+这显然和Zoutendik定理矛盾。因此必有
 
 $$
 \operatorname* {l i m}_{k \to\infty} \nabla f ( x^{k} )=0. 
 $$
-推论6.1建立在 Zoutendik 条件之上，它的本质要求是关系(6.1.8)，即每一步的下降方向d 和负梯度方向不能趋于正交.这个条件的几何直观明显:当下降方向d 和梯度正交时，根据泰勒展开的一阶近似，目标函数值f(x)几乎不发生改变，因此我们要求与梯度正交方向夹角有一致的下界.后面会介绍多种d的选取方法，在选取时条件(6.1.8)总得到满足总的来说，推论6.1仅仅给出了最基本的收敛性，而没有更进一步回答算法的收敛速度.这是由于算法收敛速度极大地取决于d的选取.接下来我们将着重介绍如何选取下降方向 d.
+该推论建立在 Zoutendik 条件之上，它的本质要求是每一步的下降方向$d_{k}$和负梯度方向不能趋于正交。这个条件的几何直观明显:当下降方向$d_{k}$和梯度正交时，根据泰勒展开的一阶近似，目标函数值$f(x)$几乎不发生改变，因此要求$d_{k}$与梯度正交方向夹角有一致的下界。
+
+后面会介绍多种d的选取方法，在选取时条件(6.1.8)总得到满足总的来说，推论6.1仅仅给出了最基本的收敛性，而没有更进一步回答算法的收敛速度.这是由于算法收敛速度极大地取决于d的选取.接下来我们将着重介绍如何选取下降方向 d.
 ## 2.4搜索算法
 在实际应用中较少使用.
 需要选择的合适步长，使$f(x_{k}+\alpha_{k} d_{k})<f(x_{k})$，同时保证序列${f(x_{k})}$收敛于极小点。
