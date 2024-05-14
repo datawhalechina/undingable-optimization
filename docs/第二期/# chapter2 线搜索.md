@@ -72,13 +72,16 @@ $$
 主要包含两方面的内容：（1）满足什么样的准则，步长可以接受？（2）有了合适的准则，满足该准则的步长该如何求？
 线搜索的目标是选取合适的  使得 φ(ak)尽可能减小.但这一工作并不容易:wk应该使得f充分下降，与此同时不应在寻找上花费过多的计算量.我们需要权衡这两个方面.一个自然的想法是寻找 《 使得 -->
 <!-- ### 2.3.1精确线搜索准则 -->
-&emsp;&emsp;搜索步长的选择通常需要在目标函数下降量和确定$\alpha_{k}$的计算量之间进行平衡。一个很自然的想法是取$\alpha_{k}$使目标函数$f(x_{k})$沿方向$d_{k}$达到极小，即使得$
-\phi( \alpha_{k} )=\operatorname* {m i n}\limits_{\alpha> 0} \phi( \alpha)$，这种方法称为精确线搜索。由于在实际计算中，采用精确线搜索通常需要很大的计算量，且对一般问题而言，实现精确线搜索十分困难，因此在实际应用中较少使用。另一个想法是不去求$
+&emsp;&emsp;搜索步长的选择通常需要在目标函数下降量和确定$\alpha_{k}$的计算量之间进行平衡。一个很自然的想法是取$\alpha_{k}$使目标函数$f(x_{k})$沿方向$d_{k}$达到极小，即使得
+$$
+ \phi( \alpha_{k} )=\operatorname* {m i n}\limits_{\alpha> 0} \phi( \alpha) ,
+ $$
+这种方法称为精确线搜索。由于在实际计算中，采用精确线搜索通常需要很大的计算量，且对一般问题而言，实现精确线搜索十分困难，因此在实际应用中较少使用。另一个想法是不去求$
 \phi( \alpha)$的最小值点，而是选取$\alpha_{k}$使目标函数得到可接受的下降量$f(x_{k})-f(x_{k}+\alpha_{k} d_{k})$，这种线搜索方法被称为非精确线搜索。非精确线搜索因需要的计算量相对较少更受人们青睐。
 <!-- 
 因而花费计算较少的非精确线搜索更受人们青睐。理论上精确的最优步长一般很难求得，当变量维度非常高或者$f(x)$非常复杂时，采用这种方法选取$\alpha_{k}$通常需要很大计算量。实际上，当迭代点离最优解尚远时，是没有必要做高精度线搜索的。另外，对一般问题而言，实现精确线搜索是很困难的。如果选取$\alpha_{k}$使目标函数$f$得到可接受的下降量，即使得下降量$f(x_{k})-f(x_{k}+\alpha_{k} d_{k})>0$是用户可接受的，则称为非精确线搜索。 -->
 ### 2.4.1非精确线搜索准则
-&emsp;&emsp;在非精确线搜索算法中，在选取$\alpha_{k}$时仅使$f(x_{k}+\alpha_{k} d_{k})<f(x_{k})$，是不足以确保生成的迭代序列$\{x_{k}\}$收敛到最优解的，选取$\alpha_{k}$需要满足一定的要求，这些要求被称为线搜索准则。线搜索准则的合适与否直接决定了算法的收敛性，若选取不合适的线搜索准则将会导致算法无法收敛至极小值点。例如考虑一维无约束优化问题
+&emsp;&emsp;在非精确线搜索算法中，仅使$f(x_{k}+\alpha_{k} d_{k})<f(x_{k})$，是不足以确保生成的迭代序列$\{x_{k}\}$收敛到最优解的，选取$\alpha_{k}$需要满足一定的要求，这些要求被称为线搜索准则。线搜索准则的合适与否直接决定了算法的收敛性，若选取不合适的线搜索准则将会导致算法无法收敛至极小值点。例如考虑一维无约束优化问题
 $$
 \operatorname* {m i n}_{x} f(x)=x^{2}
 $$
@@ -110,10 +113,10 @@ $$
 是一个常用的线搜索准则，引人 Armiio准则的目的是保证每一步迭代充分下降。
 Armijo 准则有非常直观的几何含义，它指的是点$(\alpha,\phi(\alpha))$必须在直线
 $$l(\alpha)=f ( x_{k} )+\rho\alpha \nabla f(x_{k})^{\mathsf{T}}d_{k}$$
-的下方。如下图所示(图中$g=\nabla f (x)$)，区间（0,$\beta_{4}$]和[$\beta_{5}$,$\beta_{6}$]中的点均满足 Armijo 准则。$d$为下降方向，满足$\nabla f ( x_{k} )^{\mathsf{T}} d_{k}<0$， $l(\alpha)$的斜率为负，选取符合 Armiio准则的$\alpha$确实会使得函数值下降。在实际应用中，参数$c_{1}$通常选为一个很小的正数，例如$c_{1}=10^{-3}$，这使得 Armijo 准则非常容易得到满足。但是仅仅使用 Armijo 准则并不能保证迭代的收敛性，因为可行区域中包含了步长$\alpha$接近0的区域，当$\alpha$取值太小时，目标函数值的下降量可能过小，导致序列$\{f(x_{k})\}$的极限值不是极小值，必须避免$\alpha$取值过小，因此Armiio准则需要配合其他准则共同使用。
+的下方。如下图所示(图中$g=\nabla f (x)$)，区间（0,$\beta_{4}$]和[$\beta_{5}$,$\beta_{6}$]中的点均满足 Armijo 准则。因为$\nabla f ( x_{k} )^{\mathsf{T}} d_{k}<0$，所以$l(\alpha)$的斜率为负，选取符合 Armiio准则的$\alpha$确实会使得函数值下降。在实际应用中，参数$c_{1}$通常选为一个很小的正数，例如$c_{1}=10^{-3}$，这使得 Armijo 准则非常容易得到满足。但是仅仅使用 Armijo 准则并不能保证迭代的收敛性，因为可行区域中包含了步长$\alpha$接近0的区域，当$\alpha$取值太小时，目标函数值的下降量可能过小，导致序列$\{f(x_{k})\}$的极限值不是极小值，为必须避免$\alpha$取值过小，Armijo准则需要配合其他准则共同使用。
 ![Armijo准则](./images/ch2/Armijo准则_1.png "Armijo准则")
 #### 2.Goldstein准则
-&emsp;&emsp;为了克服 Armijo 准则的缺陷，需要引入其他准则来保证每一步的 $\alpha$不会太小。既然 Armijo 准则只要求点($\alpha,\phi(\alpha)$)必须处在某直线下方，我们也可使用相同的形式使得该点必须处在另一条直线的上方。这就是Armijo-Goldstein 准则，简称 Goldstein 准则：
+&emsp;&emsp;为了克服 Armijo 准则的缺陷，需要引入其他准则来保证每一步的 $\alpha$不会太小。既然 Armijo 准则只要求点($\alpha,\phi(\alpha)$)必须处在某直线下方，则也可使用相同的形式使得该点必须处在另一条直线的上方。这就是Armijo-Goldstein 准则，简称 Goldstein 准则：
 
 $$
 \begin{aligned} {{f ( x_{k}+\alpha d_{k} )}} & {{} {{} \leqslant f ( x_{k} )+\rho \alpha\nabla f ( x_{k} )^{\mathsf{T}} d_{k},}} \\ {{f ( x_{k}+\alpha d_{k} )}} & {{} {{} \geqslant f ( x_{k} )+( 1-\rho ) \alpha\nabla f ( x_{k} )^{\mathsf{T}} d_{k},}} \\ \end{aligned} 
@@ -146,7 +149,7 @@ $$
 其中$1>\sigma>\rho>0$。
 ### 2.4.2收敛性
 &emsp;&emsp;
-这一小节给出非精确线搜索算法的收敛性。
+这一节将以Wolfe准则为例，通过引入Zoutendijk定理说明非精确线搜索算法的收敛性。
 
  $\textbf{Zoutendijk定理:}$考虑一般的迭代格式$x_{k+1}=x_{k}+\alpha_{K}d_{k}$，其中$d_{k}$是搜索方向，$\alpha_{k}$是步长，且在迭代过程中Wolfe准则满足。假设目标函数$f$下有界、连续可微且梯度$L$-利普希茨连续，即
 $$
@@ -203,7 +206,7 @@ $$
 \sum_{j=0}^{\infty} \operatorname{cos}^{2} \theta_{j} \| \nabla f ( x_{j} ) \|^{2} <+\infty. 
 $$
 
-&emsp;&emsp;Zoutendik定理指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且下有界函数总能推出(2)式成立。实际上采用Goldstein准则也可推出类似的条件。Zoutendik定理刻画了线搜索准则的性质，配合下降方向$d_{k}$的选取方式可以得到最基本的收敛性。
+&emsp;&emsp;Zoutendik定理指出，只要迭代点满足 Wolfe 准则，对梯度利普希茨连续且下有界函数总能推出(2)式成立。实际上采用Goldstein准则也可推出类似的条件。Zoutendik定理刻画了线搜索准则的性质，配合下降方向$d_{k}$的选取方式可以得到线搜索算法最基本的收敛性。
 
 
 $\textbf{线搜索算法的收敛性:}$
@@ -233,16 +236,16 @@ $$
 $$
 \begin{aligned} {{\sum_{k=0}^{\infty} \operatorname{c o s}^{2} \theta_{k} \| \nabla f ( x_{k} ) \|^{2}}} & {{} \geqslant\sum_{l=1}^{\infty} \operatorname{cos}^{2} \theta_{k_{l}} \| \nabla f ( x_{k_{l}} ) \|^{2}} \\ {} & {{} \geqslant\sum_{l=1}^{\infty} ( \operatorname{sin}^{2} \gamma) \cdot\delta^{2} \to+\infty,} \\ \end{aligned} 
 $$
-这显然和Zoutendik定理矛盾。因此必有
+这显然和Zoutendijk定理矛盾。因此必有
 
 $$
 \operatorname* {l i m}_{k \to\infty} \nabla f ( x^{k} )=0. 
 $$
-该推论建立在 Zoutendik 条件之上，它的本质要求是每一步的下降方向$d_{k}$和负梯度方向不能趋于正交。这个条件的几何直观明显:当下降方向$d_{k}$和梯度正交时，根据泰勒展开的一阶近似，目标函数值$f(x)$几乎不发生改变，因此要求$d_{k}$与梯度正交方向夹角有一致的下界。
+该证明建立在 Zoutendik 条件之上，它的本质要求是每一步的下降方向$d_{k}$和负梯度方向不能趋于正交。这个条件的几何直观明显:当下降方向$d_{k}$和梯度正交时，根据泰勒展开的一阶近似，目标函数值$f(x)$几乎不发生改变，因此要求$d_{k}$与梯度正交方向夹角有一致的下界。线搜索算法的收敛速度极大地取决于$d$的选取和目标函数的性质等，具体可参考《Numerical Optimization》书中的相关内容。
+### 2.4.3搜索算法
+&emsp;&emsp;这节主要介绍如何求满足线搜索准则的步长。
 
-后面会介绍多种d的选取方法，在选取时条件(6.1.8)总得到满足总的来说，推论6.1仅仅给出了最基本的收敛性，而没有更进一步回答算法的收敛速度.这是由于算法收敛速度极大地取决于d的选取.接下来我们将着重介绍如何选取下降方向 d.
-## 2.4搜索算法
-在实际应用中较少使用.
+<!-- 在实际应用中较少使用.
 需要选择的合适步长，使$f(x_{k}+\alpha_{k} d_{k})<f(x_{k})$，同时保证序列${f(x_{k})}$收敛于极小点。
 构造辅助函数$\phi(\alpha)=f(x_{k}+\alpha d_{k})$，其中$d_{k}$为给定的下降方向，，$\alpha>0$为该辅助函数的自变量。函数$\phi(\alpha)$的步长，则
 $$
@@ -290,13 +293,14 @@ $$
 \text { 更新迭代点： } x_{k}=x_{k-1}+\alpha_{k} \cdot \boldsymbol{d}_{k} \\
 \text { 判断迭代点是否满足终止准则： } \text { 终止准则 } \\
 \text { 迭代： } k=k+1, \text { 转 } 2 \\
-\end{array}
-
-## 2.3搜索算法
-### 2.3.1 回退算法
-在优化算法的实现中，寻找一个满足 Armijo 准则的步长是比较容易的,一个最常用的算法是回退法，给定初值&，回退法通过不断以指数方式缩小试探步长，找到第一个满足 Armijo 准则(6.1.2)的点.
->1. 选择初始步长$
-\overline{\alpha}$，参数$\gamma,c\in(0,1)$。初始化$\alpha\leftarrow\overline{\alpha}$。
+\end{array} -->
+<!-- 
+## 2.3搜索算法 -->
+#### 1 回退算法
+&emsp;&emsp;回退法是通过不断以指数方式缩小试探步长，找到第一个满足终止条件的点,是最常用的线搜索算法之一。以寻找一个满足Armijo准则的步长为例:
+<!-- Armijo准则的点在优化算法的实现中，寻找一个满足Armijo准则的步长是比较容易的，一个最常用的算法是回退法，给定初值$\overline{\alpha}$，回退法通过不断以指数方式缩小试探步长，找到第一个满足Armijo 准则的点。 -->
+>1. 选择初始步长
+$\overline{\alpha}$，参数$\gamma,c\in(0,1)$。初始化$\alpha\leftarrow\overline{\alpha}$。
 >
 >2. while$f(x_{k} + \alpha d_{k}) > f(x_{k}) + c\alpha \nabla f(x_{k})^{\mathbb{T}}d_{k}$ do
 >
@@ -305,176 +309,20 @@ $$
 >4. end while
 >5. 输出$\alpha_{k}=\alpha$
 
-该算法被称为回退法是因为$\alpha$的试验值是由大至小的，它可以确保输出的 “ 能尽量地大.此外算法6.1不会无限进行下去，因为d是一个下降方向，当$\alpha$充分小时，Armijo 准则总是成立的，在实际应用中我们通常也会给α设置一个下界，防止步长过小.
-本小节介绍在实际中使用的线搜索算法.之前的讨论已经初步介绍了回退法(算法6.1)，并指出该算法可以用于寻找 Armijo 准则(6.1.2)的步长实际上只要修改一下算法的终止条件，回退法就可以被用在其他线搜索准则之上，例如之前我们提到的两种非单调线搜索准则(6.1.5)和(6.1.6).回退法的实现简单、原理直观，所以它是最常用的线搜索算法之一.然而，回退法的缺点也很明显:第一，它无法保证找到满足 Wolfe 准则的步长，即条件(6.1.4b)不一定成立，但对一些优化算法而言，找到满足 Wolfe 准则的步长是十分必要的;第二，回退法以指数的方式缩小步长，因此对初值¢和参数 γ的选取比较敏感，当丫过大时每一步试探步长改变量很小，此时回退法效率比较低，当丫过小时回退法过于激进，导致最终找到的步长太小，错过了选取大步长的机会:下面简单介绍其他类型的线搜索算法.
-### 2.3.2 黄金分割法
 
-```
-算法6.1 线搜索回退法
-1. 选择初始步长$\a$，参数α∈(0,1)。初始化α←α。
-2. while f(x* + αdk) > f(x) + α⋅c⋅f(x)'dk do
-3.     令α←α/2
-4. end while
-5. 输出 αk = α
-```
+&emsp;&emsp;回退法中$\alpha$的试验值是由大至小的，因此可以确保输出的$\alpha$能尽量的大。同时因为$d$是一个下降方向，当$\alpha$充分小时，Armijo准则总是成立的,回退法不会限进行下去，在实际应用中我们通常也会给$\alpha$设置一个下界，防止步长过小。然而，回退法的缺点也很明显：第一，它无法保证找到满足 Wolfe 准则的步长，但对一些优化算法而言，找到满足 Wolfe 准则的步长是十分必要的；第二，回退法以指数的方式缩小步长，因此对初值$\overline{\alpha}$和参数$\gamma$的选取比较敏感，当$\gamma$过大时每一步试探步长改变量很小，此时回退法效率比较低，当$\gamma$过小时回退法过于激进，导致最终找到的步长太小，错过了选取大步长的机会。
+#### 2 多项式插值法
+&emsp;&emsp;为了提高回退法的效率，有基于多项式插值的线搜索算法，其原理是用己有的函数信息，构造近似$\phi(\alpha)$的多项式函数，求出该多项式函数的极小点并检验它是否满足非精确线搜索准则；若不满足，则根据新的函数信息去构造新的多项式函数；如此反复，直至满足非精确线搜索准则。
 
-
-## 2.4收敛性分析
-&emsp;&emsp;线搜索算法框架可以分为以下几个步骤：
-
-1. 确定搜索方向：根据目标函数的性质，确定搜索方向，例如梯度下降法中，搜索方向为负梯度方向；
-
-2. 确定步长：根据搜索方向，确定步长，即迭代步长；
-
-3. 更新迭代点：根据搜索方向和步长，更新迭代点；
-
-## 3.1 梯度
-
-&emsp;&emsp;我们常常用函数的一阶信息即梯度去求函数的最优值。上述问题的梯度可以记做
+&emsp;&emsp;以二次插值法和Armijo准则为例，假设初始步长$\alpha_{0}$已给定，如果经过验证，$\alpha_{0}$不满足Armijo准则，下一步就需要减小试探步长，基于$\phi(0),\phi'(0),\phi(\alpha_{0})$这三个信息构造一个二次插值函数$p_{2}(\alpha)$满足
 $$
-\underbrace{\nabla_{\boldsymbol{w}^{(i)}} L\left(\boldsymbol{w}^{(1)}, \cdots, \boldsymbol{w}^{(l)}\right) \triangleq \frac{\partial L\left(\boldsymbol{w}^{(1)}, \cdots, \boldsymbol{w}^{(l)}\right)}{\partial \boldsymbol{w}^{(i)}}}_{\text {两种符号都表示 } L \text { 关于 } \boldsymbol{w}^{(l)} \text { 的梯度 }}, \quad \forall i=1, \cdots, l .
+p_2(0)=\phi(0),\quad p_2'(0)=\phi'(0),\quad p_2({\alpha}_0)=\phi({\alpha}_0).
 $$
-注意梯度 $\displaystyle\nabla _{w^{(i)}}L$ 的形状应该和 $w^{(i)}$ 的形状完全一致。
-
-&emsp;&emsp;如果用 `TensorFlow`和 `PyTorch` 等深度学习平台，可以不需要关心梯度是如何求出来的。只要定义的函数对某个变量可微，`TensorFlow`和 `PyTorch`就可以自动求该函数关于该变量的梯度。但是，我们应该注意在写程序前，检查梯度的形状与变量的形状是否相同。
-
-## 3.2 梯度下降
-
-&emsp;&emsp;我们通常规定梯度是函数的最快的上升方向。因此，想要极小化一个函数，很自然地会想到沿着梯度方向的反方向去搜索。沿着梯度反方向称为做梯度下降（GD）。
-$$
-x_{k+1}=x_{k}+\alpha_{k}*\left(-\nabla f\left(x_{k}\right)\right).
-$$
-&emsp;&emsp;我们也可以用瞎子爬山的例子来理解梯度下降算法的含义，瞎子爬山可以看做求一个函数的极大值，瞎子在每一步都可以获得当前的坡度（即梯度），但不知道其他各点的任何情况。梯度下降法相当于在爬山中沿着山坡最陡的方向往前爬（或是下山）。
-
-&emsp;&emsp;那么，对于最上面提出的优化问题，可以写出瞎子的梯度下降的算法过程：
-$$
-w_{\text {new }}^{(i)} \leftarrow w_{\text {now }}^{(i)}-\alpha \cdot \nabla_{w^{(i)}} L\left(w_{\text {now }}^{(1)}, \cdots, w_{\text {now }}^{(l)}\right), \quad \forall i=1, \cdots, l
-$$
-其中， $\displaystyle w_{\text {now }}^{(1)}, \cdots, w_{\text {now }}^{(l)}$ 为当前需要优化的变量。
-
-&emsp;&emsp;通常称上面式子中的 $\alpha$ 为步长或者是学习率，其设置影响梯度下降算法的收敛速率，最终会影响神经网络的测试准确率，所以 $\alpha$ 需要仔细调整。数学中常常通过线搜索的方式寻找 $\alpha$，可以参考 Jorge Nocedel的《Numerical Optimization》文献[1]，这里不再赘述。
-
-&emsp;&emsp;当优化函数是凸的L-利普希茨连续函数时，梯度下降法可以保证收敛性，且收敛速率为 $\displaystyle O(\frac{1}{k})$，$k$为迭代步数。
-
->  **注：**利普希茨连续的定义是如果函数 $f$ 在区间 $Q$ 上以常数L-利普希茨连续，那么对于 $x, y \in Q$ 有
-> $$
-> \|f(x)-f(y)\| \leq L\|x-y\|
-> $$
-
-&emsp;&emsp;给出一个简单的 python程序再来复习一下梯度下降法。
-```python
-"""
-一维问题的梯度下降法示例
-"""
-
-def func_1d(x):
-    """
-    目标函数
-    :param x: 自变量，标量
-    :return: 因变量，标量
-    """
-    return x ** 2 + 1
-
-
-def grad_1d(x):
-    """
-    目标函数的梯度
-    :param x: 自变量，标量
-    :return: 因变量，标量
-    """
-    return x * 2
-
-
-def gradient_descent_1d(grad, cur_x=0.1, learning_rate=0.01, precision=0.0001, max_iters=10000):
-    """
-    一维问题的梯度下降法
-    :param grad: 目标函数的梯度
-    :param cur_x: 当前 x 值，通过参数可以提供初始值
-    :param learning_rate: 学习率，也相当于设置的步长
-    :param precision: 设置收敛精度
-    :param max_iters: 最大迭代次数
-    :return: 局部最小值 x*
-    """
-    for i in range(max_iters):
-        grad_cur = grad(cur_x)
-        if abs(grad_cur) < precision:
-            break  # 当梯度趋近为 0 时，视为收敛
-        cur_x = cur_x - grad_cur * learning_rate
-        print("第", i, "次迭代：x 值为 ", cur_x)
-
-    print("局部最小值 x =", cur_x)
-    return cur_x
-
-
-if __name__ == '__main__':
-    gradient_descent_1d(grad_1d, cur_x=10, learning_rate=0.2, precision=0.000001, max_iters=10000)
-```
-
-## 3.3 随机梯度下降
-
-&emsp;&emsp;在需要优化大规模的问题时，计算梯度已经成为了一件非常麻烦的事情。是否能够用梯度样本中的一些例子来近似所有的梯度样本呢？答案是可以的！
-
-&emsp;&emsp;如果目标函数可以写成连加或者期望的形式，那么就可以用随机梯度下降求解最小化问题。
-
-&emsp;&emsp;假设目标函数可以写成 $n$ 项连加形式：
-$$
-L\left(\boldsymbol{w}^{(1)}, \cdots, \boldsymbol{w}^{(l)}\right)=\frac{1}{n} \sum_{j=1}^{n} F_{j}\left(\boldsymbol{w}^{(1)}, \cdots, \boldsymbol{w}^{(l)}\right)
-$$
-&emsp;&emsp;其中，函数 $F_j$ 隐含第 $j$ 个训练样本 $(x_j , y_j)$。每次随机从集合 ${1, 2, \cdots , n}$ 中抽取一个整数，记作 $j$。设当前的优化变量为 $w_{\text {now }}^{(1)}, \cdots, w_{\text {now }}^{(l)}$ 计算此处的随机梯度，并对他做随机梯度下降：
-$$
-\mid w_{\text {new }}^{(i)} \leftarrow w_{\text {now }}^{(i)}-\alpha \cdot \underbrace{\nabla_{w^{(i)}} F_{j}\left(w_{\text {now }}^{(1)}, \cdots, w_{\text {now }}^{(l)}\right)}_{\text {随机梯度 }}, \quad \forall i=1, \cdots, l .
-$$
-&emsp;&emsp;事实上，在实际操作中我们会发现使用GD算法求一些非凸的优化问题时，程序往往会停在鞍点上，无法收敛到局部最优点，这会导致测试的准确率非常低；而使用 SGD方法可以帮助我们跳出鞍点，继续向更好的最优点前进。
-
-&emsp;&emsp;令人欣喜的是， SGD也可以保证收敛，具体证明过程比较复杂，感兴趣的话可以阅读文献[4]。这里仅给出 SGD收敛的一个**充分条件**：
-$$
-\sum_{k=1}^{\infty}\alpha_k=\infty,\sum_{k=1}^{\infty}\alpha_k^2<\infty
-$$
-
-&emsp;&emsp;最后给出一个简单的 python程序复习一下随机梯度下降法。
-```python
-import numpy as np
-import math
-
-# 生成测试数据
-x = 2 * np.random.rand(100, 1)  # 随机生成100*1的二维数组，值分别在0~2之间
-
-y = 4 + 3 * x + np.random.randn(100, 1)  # 随机生成100*1的二维数组，值分别在4~11之间
-
-x_b = np.c_[np.ones((100, 1)), x]
-print("x矩阵内容如下：\n{}".format(x_b[0:3]))
-n_epochs = 100
-t0, t1 = 1, 10
-
-m = n_epochs
-def learning_schedule(t):  # 模拟实现动态修改步长
-    return t0 / (t + t1)
-
-theta = np.random.randn(2, 1)
-
-for epoch in range(n_epochs):
-    for i in range(m):
-        random_index = np.random.randint(m)
-        x_i = x_b[random_index:random_index+1]
-        y_i = y[random_index:random_index+1]
-        gradients = 2 * x_i.T.dot(x_i.dot(theta)-y_i)  # 调用公式
-        learning_rate = learning_schedule(epoch * m + i)
-        theta = theta - learning_rate * gradients
-
-    if epoch % 30 == 0:
-        print("抽样查看：\n{}".format(theta))
-
-print("最终结果：\n{}".format(theta))
-
-# 计算误差
-error = math.sqrt(math.pow((theta[0][0] - 4), 2) + math.pow((theta[1][0] - 3), 2))
-print("误差：\n{}".format(error))
-```
-
+由于二次函数只有三个参数，以上三个条件可以唯一决定$p_{2}(\alpha)$，而且不难验证$p_{2}(\alpha)$的最小值点恰好位于(0,$\alpha_{0}$)内；此时取$p_{2}(\alpha)$的最小值点$\alpha_{1}$作为下一个试探点，利用同样的方式不断递归下去直至找到满足Armijo准则的点。
 ## 参考文献
 
-【1】王树森, 黎彧君, 张志华, 深度强化学习,https://github.com/wangshusen/DRL/blob/master/Notes_CN/DRL.pdf, 2021  
-【2】Nocedal, Jorge & Wright, Stephen. (2006). Numerical Optimization. 10.1007/978-0-387-40065-5.   
-【3】Jorge Nocedal§. Optimization Methods for Large-Scale Machine Learning[J]. Siam Review, 2016, 60(2).  
-【4】Nemirovski A S , Juditsky A , Lan G , et al. Robust Stochastic Approximation Approach to Stochastic Programming[J]. SIAM Journal on Optimization, 2009, 19(4):1574-1609.
+【1】刘浩洋, 户将, 李勇锋, 文再文. 最优化:建模,算法与理论[M].高等教育出版社,2020. 
+【2】高立.数值最优化方法[M].北京大学出版社,2014.<br>
+【3】Nocedal, Jorge & Wright, Stephen. Numerical Optimization.2006. <br>
+【4】袁亚湘,孙文瑜.最优化理论与方法[M].科学出版社,1997.
 
