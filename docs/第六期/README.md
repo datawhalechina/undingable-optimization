@@ -1,4 +1,4 @@
-这一期我们将通过一些运筹优化的代码实战案例，来带大家用运筹优化的知识来解决实际生活中可能遇到的问题。
+这一期我们将通过一些代码实战案例，来带大家用运筹优化的知识来解决实际生活中可能遇到的问题。
 
 ## 参考资料
 [1] [Gurobi Optimizer Example Tour](https://www.gurobi.com/documentation/9.5/examples/index.html) <br>
