@@ -1,5 +1,4 @@
-本期将介绍如何使用优化求解器进行求解，并给出一些实践案例。求解器采用gurobi和Copt。
-
+这一期我们将通过一些运筹优化的代码实战案例，来带大家用运筹优化的知识来解决实际生活中可能遇到的问题。
 
 ## 参考资料
 [1] [Gurobi Optimizer Example Tour](https://www.gurobi.com/documentation/9.5/examples/index.html) <br>
