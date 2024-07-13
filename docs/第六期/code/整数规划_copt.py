@@ -12,6 +12,9 @@ env = cp.Envr()
 # 创建模型
 model = env.createModel("knapsack_problem")
 
+# 设置日志输出
+model.setLogFile('knapsack_problem_copt.log')
+
 # 添加变量
 x = model.addVars(len(weights), lb=0, vtype=COPT.INTEGER, nameprefix="x")
 

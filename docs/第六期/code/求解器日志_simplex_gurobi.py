@@ -20,6 +20,10 @@ market_demand     = np.random.randint(10, 100, size=(num_markets, num_products))
 # 创建模型
 model = gp.Model("supply_chain_network_design")
 
+# 设置日志输出
+model.setParam('OutputFlag', 1)  # 打开日志输出
+model.setParam('LogFile', 'log_demo_simplex_gurobi.log')  # 将日志写入文件
+
 # 添加变量
 x = model.addVars(num_factories, num_products, vtype=GRB.CONTINUOUS, name="x")
 y = model.addVars(num_factories, num_warehouses, num_products, vtype=GRB.CONTINUOUS, name="y")
@@ -57,17 +61,17 @@ model.optimize()
 # 输出结果
 if model.status == GRB.OPTIMAL:
     print("Optimal solution found:")
-    for f in range(num_factories):
-        for p in range(num_products):
-            print(f"Factory {f} produces {x[f, p].x} units of product {p}.")
-            for w in range(num_warehouses):
-                if y[f, w, p].x > 0:
-                    print(f"  Ships {y[f, w, p].x} units of product {p} to warehouse {w}.")
-    for w in range(num_warehouses):
-        for m in range(num_markets):
-            for p in range(num_products):
-                if z[w, m, p].x > 0:
-                    print(f"Warehouse {w} ships {z[w, m, p].x} units of product {p} to market {m}.")
+    # for f in range(num_factories):
+    #     for p in range(num_products):
+    #         print(f"Factory {f} produces {x[f, p].x} units of product {p}.")
+    #         for w in range(num_warehouses):
+    #             if y[f, w, p].x > 0:
+    #                 print(f"  Ships {y[f, w, p].x} units of product {p} to warehouse {w}.")
+    # for w in range(num_warehouses):
+    #     for m in range(num_markets):
+    #         for p in range(num_products):
+    #             if z[w, m, p].x > 0:
+    #                 print(f"Warehouse {w} ships {z[w, m, p].x} units of product {p} to market {m}.")
     print(f"Objective value: {model.objVal}")
 else:
     print("No optimal solution found.")

@@ -113,10 +113,4 @@ Temporary Items
 .idea
 
 *.pdf
-docs/第一期/SGD.py
-docs/第一期/增广拉格朗日函数法.py
-docs/第一期/蚁群算法解决TSP问题.py
-docs/第六期/lp_copt.py
-docs/第六期/lp_gurobi.py
-docs/第六期/1_简单线性规划_copt.py
-docs/第六期/1_简单线性规划_gurobi.py
+*.log
