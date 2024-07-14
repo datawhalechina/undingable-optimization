@@ -137,24 +137,22 @@ else:
 | 添加变量      | `x = model.addVar(name="x")`         | `x = model.addVar(name="x")`         |
 | 设置变量类型  | `x = model.addVar(vtype=GRB.INTEGER)`| `x = model.addVar(vtype=COPT.INTEGER)` |
 | 添加多个变量  | `vars = model.addVars(10, name='x')`           | `vars = model.addVars(10, nameprefix='x')`           |
-| 设置目标函数  | `model.setObjective(expr, GRB.MAXIMIZE)` | `model.setObjective(expr, COPT.MAXIMIZE)` |
-| 添加约束      | `model.addConstr(x + y <= 10)`       | `model.addConstr(x + y <= 10)`       |
-| 添加多个约束  | `model.addConstrs((x[i] + y[i] <= 10 for i in range(10)))` | `model.addConstrs((x[i] + y[i] <= 10 for i in range(10)))` |
+| 设置目标函数  | `model.setObjective(expr, GRB.MAXIMIZE)` | `model.setObjective(expr, sense=COPT.MAXIMIZE)` |
+| 添加约束      | `model.addConstr(x + y <= 10, name='')`       | `model.addConstr(x + y <= 10, name='')`       |
+| 添加多个约束  | `model.addConstrs((x[i] + y[i] <= 10 for i in range(10)), name='row1')` | `model.addConstrs((x[i] + y[i] <= 10 for i in range(10)), nameprefix='row1')` |
 | 模型求解      | `model.optimize()`                   | `model.solve()`                      |
 | 获取变量名    | `x.varName()`                        | `x.getName()`                        |
 | 获取变量值    | `x.X`                                | `x.X`                                |
 | 获取目标值    | `model.objVal`                       | `model.objVal`                       |
 | 读取模型文件  | `model = gp.read("model_file.mps")`  | `model = cp.read("model_file.mps")`  |
 | 写出模型文件  | `model.write("model_file.mps")`      | `model.write("model_file.mps")`      |
-| 获取约束松弛  | `model.getConstrByName("c1").slack`  | `model.getConstrByName("c1").slack`  |
 
 
 ### 主要区别
 
-- **创建环境**：Copt 在创建模型之前需要通过 `env = cp.Envr()` 创建环境，而 Gurobi 则不需要。
-- **创建模型**：Gurobi是直接通过`gp.Model("model_name")`创建模型，而Copt是先创建环境，然后通过`env.createModel("model_name")` 创建模型。
+- **创建模型**：Gurobi 是直接通过`gp.Model("model_name")`创建模型，而 Copt 是先通过 `env = cp.Envr()`创建环境，然后通过`env.createModel("model_name")` 创建模型。
+- **变量定义**：Gurobi 中的变量类型和目标函数常量使用 `GRB`，而 COPT 使用 `COPT`。增加多个变量`addVars`时，Gurobi 使用`name=`给变量批量命名，COPT 使用`nameprefix=`批量给变量命名。
 - **模型求解**：Gurobi 使用 `model.optimize()`，COPT 使用 `model.solve()`。
-- **变量定义**：Gurobi 中的变量类型和目标函数常量使用 `GRB`，而 COPT 使用 `COPT`。
 - **变量名获取**：Gurobi 使用`x.varName()`获取变量名，而 COPT 使用`x.getName()`。
 
 更多差异请参阅求解器官网文档：

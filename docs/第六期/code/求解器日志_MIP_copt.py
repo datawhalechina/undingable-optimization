@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from gurobipy import Model, GRB, quicksum
+import coptpy as cp
+from coptpy import COPT
 
 # 设置随机种子，确保程序每次运行结果一致
 rnd = np.random
@@ -24,30 +25,28 @@ max_capacity = 20  # 车最大载重
 demands = {i: rnd.randint(1, 10) for i in customers}  # 随机生成客户点的需求量，范围[1,10]
 
 # 创建模型
-model = Model('CVRP')
+env = cp.Envr()
+model = env.createModel('CVRP')
 
 # 日志
-model.setParam('OutputFlag', True)
-model.setParam('LogFile', 'log_demo_MIP.log')
-model.setParam('MIPGap', 0.01)
+model.setLogFile('log_demo_MIP_copt.log')
 
 # 添加变量
-x = model.addVars(arcs, vtype=GRB.BINARY, name="x")  # 是否链接ij的二元变量
-u = model.addVars(customers, vtype=GRB.CONTINUOUS, name="u")  # 车在客户点的累计载货量
+x = model.addVars(arcs, vtype=COPT.BINARY, nameprefix="x")  # 是否链接ij的二元变量
+u = model.addVars(customers, vtype=COPT.CONTINUOUS, nameprefix="u")  # 车在客户点的累计载货量
 
 # 设定目标函数：最小化总距离
-model.modelSense = GRB.MINIMIZE
-model.setObjective(quicksum(x[i, j] * distances[i, j] for i, j in arcs))
+model.setObjective(cp.quicksum(x[i, j] * distances[i, j] for i, j in arcs), sense=COPT.MINIMIZE)
 
 # 添加约束条件
-model.addConstrs((quicksum(x[i, j] for j in nodes if i != j) == 1) for i in customers)
-model.addConstrs((quicksum(x[i, j] for i in nodes if i != j) == 1) for j in customers)
+model.addConstrs((cp.quicksum(x[i, j] for j in nodes if i != j) == 1) for i in customers)
+model.addConstrs((cp.quicksum(x[i, j] for i in nodes if i != j) == 1) for j in customers)
 model.addConstrs((x[i, j] == 1) >> (u[i] + demands[j] == u[j]) for i, j in arcs if i != 0 and j != 0)
 model.addConstrs((u[i] >= demands[i]) for i in customers)
 model.addConstrs((u[i] <= max_capacity) for i in customers)
 
 # 优化模型
-model.optimize()
+model.solve()
 
 # 输出最优解的所有连线，即xij中值接近1的(i,j)
 active_arcs = [arc for arc in arcs if x[arc].x > 0.9]
