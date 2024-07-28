@@ -38,16 +38,18 @@
 
 一个一般的整数规划问题可以表示为：
 
-$$ \text{minimize} \quad c^T x $$
-$$ \text{subject to} \quad Ax \le b $$
-$$ x \in \mathbb{Z}^n $$
+$$\text{minimize} \quad c^T x$$
+
+$$\text{subject to} \quad Ax \le b$$
+
+$$x \in \mathbb{Z}^n$$
 
 其中：
-- $ x $ 是决策变量向量。
-- $ c $ 是目标函数系数向量。
-- $ A $ 是约束系数矩阵。
-- $ b $ 是约束右端项向量。
-- $ \mathbb{Z} $ 表示整数集合。
+- $x$ 是决策变量向量。
+- $c$ 是目标函数系数向量。
+- $A$ 是约束系数矩阵。
+- $b$ 是约束右端项向量。
+- $\mathbb{Z}$ 表示整数集合。
 
 ### 1.4 常见的整数规划问题
 
@@ -101,13 +103,17 @@ $$ x \in \mathbb{Z}^n $$
 ### 3.2 数学模型
 
 目标是最大化背包内物品的总价值：
+
 $$\text{Maximize} \quad \sum_{i=1}^n v_i x_i$$
 
 约束条件是所选物品的总重量不能超过背包的容量：
+
 $$\text{Subject to} \quad \sum_{i=1}^n w_i x_i \leq C$$
 
 并且，所有的 $x_i$ 都是非负整数变量：
+
 $$x_i \geq 0$$
+
 $$x_i \in \mathbb{Z}, \quad \forall i = 1, 2, \ldots, n$$
 
 #### 示例数据
@@ -128,11 +134,15 @@ $$x_i \in \mathbb{Z}, \quad \forall i = 1, 2, \ldots, n$$
 对于上述数据，数学模型如下：
 
 目标函数：
+
 $$\text{Maximize} \quad 3x_1 + 4x_2 + 5x_3 + 8x_4$$
 
 约束条件：
+
 $$2x_1 + 3x_2 + 4x_3 + 5x_4 \leq 5$$
-$$x_i >          = 0$$
+
+$$x_i > = 0$$
+
 $$x_i \in  \mathbb{Z}, \quad \forall i = 1, 2, \ldots, n$$
 
 这个模型要求在不超过背包容量的前提下，最大化选入背包的物品的总价值。
