@@ -41,7 +41,7 @@ $$\mathbf{x}_i \in \mathbb{Z}, \ \forall i \in \mathcal{I}$$
 
 $$\mathbf{x}_j \in \mathbb{R}, \ \forall j \in \mathcal{C}$$
 
-其中，$\mathbf{x}$ 是决策变量向量，$\mathbf{c}$ 是目标函数系数向量，$\mathbf{A}$ 是约束矩阵，$\mathbf{b}$ 是约束右端项向量，$\mathcal{I}$ 和 $\mathcal{C}$ 分别表示整数变量和连续变量的索引集合。
+其中，  $\mathbf{x}$ 是决策变量向量， $\mathbf{c}$ 是目标函数系数向量， $\mathbf{A}$ 是约束矩阵， $\mathbf{b}$ 是约束右端项向量， $\mathcal{I}$ 和 $\mathcal{C}$ 分别表示整数变量和连续变量的索引集合。
 
 ### 1.2 整数规划与混合整数规划的区别
 
@@ -118,15 +118,15 @@ $$\text{Minimize} \quad \sum_{i \in I} f_i x_i + \sum_{i \in I} \sum_{j \in J} c
    
 $$\sum_{i \in I} y_{ij} = d_j \quad \forall j \in J$$
 
-1. 每个需求点的需求只能由已建设的设施来供应：
+2. 每个需求点的需求只能由已建设的设施来供应：
    
 $$y_{ij} \leq d_j x_i \quad \forall i \in I, \forall j \in J$$
 
-1. 二进制变量约束：
+3. 二进制变量约束：
    
 $$x_i \in \{0, 1\} \quad \forall i \in I$$
 
-1. 连续变量非负约束：
+4. 连续变量非负约束：
    
 $$y_{ij} \geq 0 \quad \forall i \in I, \forall j \in J$$
 
