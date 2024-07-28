@@ -31,17 +31,17 @@
 
 混合整数规划是一类优化问题，其目标是优化某个线性目标函数，同时满足一组线性约束条件。其中，决策变量既可以是**连续变量**（取值在实数范围内），也可以是**整数变量**（取值在整数范围内）。形式上，MIP 问题可以表示为：
 
-$$ \min / \max \ \mathbf{c}^T \mathbf{x} $$
+$$\min / \max \ \mathbf{c}^T \mathbf{x}$$
 
 subject to
 
-$$ \mathbf{A} \mathbf{x} \leq \mathbf{b} $$
+$$\mathbf{A} \mathbf{x} \leq \mathbf{b}$$
 
-$$ \mathbf{x}_i \in \mathbb{Z}, \ \forall i \in \mathcal{I} $$
+$$\mathbf{x}_i \in \mathbb{Z}, \ \forall i \in \mathcal{I}$$
 
-$$ \mathbf{x}_j \in \mathbb{R}, \ \forall j \in \mathcal{C} $$
+$$\mathbf{x}_j \in \mathbb{R}, \ \forall j \in \mathcal{C}$$
 
-其中，$\mathbf{x}$ 是决策变量向量，$\mathbf{c}$ 是目标函数系数向量，$\mathbf{A}$ 是约束矩阵，$\mathbf{b}$ 是约束右端项向量，$\mathcal{I}$ 和 $\mathcal{C}$ 分别表示整数变量和连续变量的索引集合。
+其中，$\mathbf{x}$是决策变量向量，$\mathbf{c}$是目标函数系数向量，$\mathbf{A}$是约束矩阵，$\mathbf{b}$是约束右端项向量，$\mathcal{I}$和$\mathcal{C}$分别表示整数变量和连续变量的索引集合。
 
 ### 1.2 整数规划与混合整数规划的区别
 
@@ -98,32 +98,32 @@ $$ \mathbf{x}_j \in \mathbb{R}, \ \forall j \in \mathcal{C} $$
 ### 3.2 数学模型
 
 #### 集合和参数
-- $ I $: 候选设施地点集合。
-- $ J $: 需求点集合。
-- $ f_i $: 在设施地点 $ i $ 建设设施的固定成本。
-- $ c_{ij} $: 从设施地点 $ i $ 向需求点 $ j $ 运输单位需求的成本。
-- $ d_j $: 需求点 $ j $ 的需求量。
+- $I$: 候选设施地点集合。
+- $J$: 需求点集合。 
+- $f_i$: 在设施地点$i$建设设施的固定成本。
+- $c_{ij}$: 从设施地点$i$向需求点$j$运输单位需求的成本。
+- $d_j$: 需求点$j$的需求量。
 
 #### 变量
-- $ x_i $: 二进制变量，表示是否在设施地点 $ i $ 建设设施（1 为建设，0 为不建设）。
-- $ y_{ij} $: 连续变量，表示从设施地点 $ i $ 向需求点 $ j $ 运输的数量。
+- $x_i$: 二进制变量，表示是否在设施地点$i$建设设施（1 为建设，0 为不建设）。
+- $y_{ij}$: 连续变量，表示从设施地点$i$向需求点$j$运输的数量。
 
 #### 目标函数
 最小化总成本：
-$$ \text{Minimize} \quad \sum_{i \in I} f_i x_i + \sum_{i \in I} \sum_{j \in J} c_{ij} y_{ij} $$
+$$\text{Minimize} \quad \sum_{i \in I} f_i x_i + \sum_{i \in I} \sum_{j \in J} c_{ij} y_{ij}$$
 
 #### 约束条件
 1. 每个需求点的需求必须得到满足：
-$$ \sum_{i \in I} y_{ij} = d_j \quad \forall j \in J $$
+$$\sum_{i \in I} y_{ij} = d_j \quad \forall j \in J$$
 
 2. 每个需求点的需求只能由已建设的设施来供应：
-$$ y_{ij} \leq d_j x_i \quad \forall i \in I, \forall j \in J $$
+$$y_{ij} \leq d_j x_i \quad \forall i \in I, \forall j \in J$$
 
 3. 二进制变量约束：
-$$ x_i \in \{0, 1\} \quad \forall i \in I $$
+$$x_i \in \{0, 1\} \quad \forall i \in I$$
 
 4. 连续变量非负约束：
-$$ y_{ij} \geq 0 \quad \forall i \in I, \forall j \in J $$
+$$y_{ij} \geq 0 \quad \forall i \in I, \forall j \in J$$
 
 注意约束3和4在编写代码时可以直接写进变量定义，以减少约束数量，加快求解。
 

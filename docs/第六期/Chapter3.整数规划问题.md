@@ -38,16 +38,16 @@
 
 一个一般的整数规划问题可以表示为：
 
-\[ \text{minimize} \quad c^T x \]
-\[ \text{subject to} \quad Ax \le b \]
-\[ x \in \mathbb{Z}^n \]
+$$ \text{minimize} \quad c^T x $$
+$$ \text{subject to} \quad Ax \le b $$
+$$ x \in \mathbb{Z}^n $$
 
 其中：
-- \( x \) 是决策变量向量。
-- \( c \) 是目标函数系数向量。
-- \( A \) 是约束系数矩阵。
-- \( b \) 是约束右端项向量。
-- \( \mathbb{Z} \) 表示整数集合。
+- $ x $ 是决策变量向量。
+- $ c $ 是目标函数系数向量。
+- $ A $ 是约束系数矩阵。
+- $ b $ 是约束右端项向量。
+- $ \mathbb{Z} $ 表示整数集合。
 
 ### 1.4 常见的整数规划问题
 
