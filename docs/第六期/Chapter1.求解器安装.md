@@ -2,6 +2,16 @@
 
 首先，我们来了解一下优化求解器。如果每次遇到新的优化问题都要重新编写优化算法，那将会非常低效并且重复造轮子。而**优化求解器已经封装好了各类优化算法**，我们只需构建模型并将其转化为代码交给求解器求解，便可快速高效地获得结果，避免重复劳动。
 
+本文目录: 
+
+- [第一章 优化求解器安装指南](#第一章-优化求解器安装指南)
+  - [1.1 求解器简介](#11-求解器简介)
+  - [1.2 Gurobi 安装](#12-gurobi-安装)
+  - [1.3 Copt 安装](#13-copt-安装)
+  - [1.4 商用授权](#14-商用授权)
+  - [参考资料](#参考资料)
+
+
 ## 1.1 求解器简介
 
 优化求解器是解决复杂优化问题的高效工具，避免了重复编写算法的繁琐工作，简化了问题求解过程，使得用户能够快速获取最优解。在学术研究、工业应用、金融、物流等领域有广泛应用。以下是一些常用的优化求解器：
@@ -122,3 +132,9 @@
 
 如果你是**在校学生**，可以申请学术许可证（Academic License），例如 Gurobi 的 Academic License 可以免费试用一年。
 
+
+## 参考资料
+[1] [Gurobi Optimizer Example Tour](https://www.gurobi.com/documentation/9.5/examples/index.html) <br>
+[2] [Gurobi Optimizer Reference Manual](https://www.gurobi.com/documentation/9.5/refman/index.html) <br>
+[3] [COPT 安装教程](https://www.shanshu.ai/copt-document/detail?docType=1&id=10) <br>
+[4] [COPT 代码示例](https://www.shanshu.ai/copt-document/detail?docType=4&id=21)
